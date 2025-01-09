@@ -17,3 +17,4 @@ lint_job:
   artifacts:
     paths:
       - lint_output.txt
+    expire_in: 1 day
