@@ -1,6 +1,6 @@
 lint_job:
   stage: lint
-  image: node:22-slim
+  image: node:20-slim
   script:
     - cd server
     - echo "Install packages for a folder 'server'..."
