@@ -1,0 +1,6 @@
+stages:
+  - check
+
+job_check:
+  script:
+    - echo "Hello from yml file!"
