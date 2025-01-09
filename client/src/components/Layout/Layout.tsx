@@ -7,6 +7,8 @@ interface ILayoutProps {
 }
 
 const Layout = ({ children }: ILayoutProps) => {
+  const a = 2;
+  const 5;
   return (
     <Box
       sx={{

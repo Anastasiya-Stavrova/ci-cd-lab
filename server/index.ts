@@ -45,7 +45,3 @@ app.listen(port, (err?: ErrorEvent) => {
   }
   console.log(`Server running at http://localhost:${port}`);
 });
-
-let a = 2;
-const 5;
-
