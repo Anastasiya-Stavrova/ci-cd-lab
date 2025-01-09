@@ -13,7 +13,7 @@ cd ..
 echo "$OUTPUT" | tee -a lint_output.txt
 echo "Linter finished with exit code: $?"
 
-if [ $? -ne 0 ]; then
+if [[ "$OUTPUT" == *"error"* ]]; then
   echo "Linting error in a folder: '$DIRECTORY'."
   exit 1
 fi
