@@ -1,6 +1,6 @@
 lint_job:
   stage: lint
-  image: node:latest
+  image: node:23-alpine3.20
   script:
     - cd server
     - echo "Install packages for a folder 'server'..."
