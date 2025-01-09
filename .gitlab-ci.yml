@@ -2,5 +2,6 @@ stages:
   - check
 
 job_check:
+  stage: check
   script:
     - echo "Hello from yml file!"
