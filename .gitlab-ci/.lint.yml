@@ -1,0 +1,18 @@
+lint_job:
+  stage: lint
+  image: node:20-slim
+  script:
+    - echo "Install packages..."
+    - npm install --prefix server
+    - npm install --prefix client
+    - echo "Linter startup..."
+    - echo "Checking files from a folder 'server'..."
+    - npm run lint server --output-file=lint-results-server.txt --format=pretty
+    - echo "Checking files from a folder 'client'..."
+    - npm run lint client --output-file=lint-results-client.txt --format=pretty
+    - echo "All files have been verified!"
+  artifacts:
+    paths:
+      - lint-results-server.txt
+      - lint-results-client.txt
+    expire_in: 3 day

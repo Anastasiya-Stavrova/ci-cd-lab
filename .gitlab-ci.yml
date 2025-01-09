@@ -1,7 +1,5 @@
-stages:
-  - check
+include:
+  - local: ".gitlab-ci/.lint.yml"
 
-job_check:
-  stage: check
-  script:
-    - echo "Hello from yml file!"
+stages:
+  - lint
