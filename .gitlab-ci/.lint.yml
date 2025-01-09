@@ -2,14 +2,18 @@ lint_job:
   stage: lint
   image: node:20-slim
   script:
-    - echo "Install packages..."
-    - npm install --prefix server
-    - npm install --prefix client
-    - echo "Linter startup..."
+    - cd server
+    - echo "Install packages for a folder 'server'..."
+    - npm install
     - echo "Checking files from a folder 'server'..."
-    - npm run lint server --output-file=lint-results-server.txt --format=pretty
+    - npm run lint --output-file=lint-results-server.txt --format=pretty
+    - cd ..
+    - cd client
+    - echo "Install packages for a folder 'client'..."
+    - npm install
     - echo "Checking files from a folder 'client'..."
-    - npm run lint client --output-file=lint-results-client.txt --format=pretty
+    - npm run lint --output-file=lint-results-client.txt --format=pretty
+    - cd ..
     - echo "All files have been verified!"
   artifacts:
     paths:
