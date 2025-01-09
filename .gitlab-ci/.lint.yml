@@ -6,17 +6,17 @@ lint_job:
     - echo "Install packages for a folder 'server'..."
     - npm install
     - echo "Checking files from a folder 'server'..."
-    - npm run lint --output-file=lint-results-server.txt --format pretty
+    - npm run lint --output-file=lint-results-server.json --format json
     - cd ..
     - cd client
     - echo "Install packages for a folder 'client'..."
     - npm install
     - echo "Checking files from a folder 'client'..."
-    - npm run lint --output-file=lint-results-client.txt --format pretty
+    - npm run lint --output-file=lint-results-client.json --format json
     - cd ..
     - echo "All files have been verified!"
   artifacts:
     paths:
-      - lint-results-server.txt
-      - lint-results-client.txt
+      - lint-results-server.json
+      - lint-results-client.json
     expire_in: 3 day
