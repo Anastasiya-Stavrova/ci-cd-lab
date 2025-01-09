@@ -11,6 +11,7 @@ OUTPUT=$(npm run lint 2>&1)
 cd ..
 
 echo "$OUTPUT" | tee -a lint_output.txt
+echo "Linter finished with exit code: $?"
 
 if [ $? -ne 0 ]; then
   echo "Linting error in a folder: '$DIRECTORY'."
