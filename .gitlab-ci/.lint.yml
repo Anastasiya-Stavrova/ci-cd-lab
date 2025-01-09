@@ -6,12 +6,12 @@ lint_job:
     - cd server
     - echo "Install packages for a folder 'server'..."
     - npm install
-    - ./lint.sh server
+    - ../lint.sh server
     - cd ..
     - cd client
     - echo "Install packages for a folder 'client'..."
     - npm install
-    - ./lint.sh client
+    - ../lint.sh client
     - cd ..
     - echo "All files have been verified!"
   artifacts:
