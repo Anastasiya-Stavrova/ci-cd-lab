@@ -1,13 +1,11 @@
 FROM node:20.17.0-slim AS builder
 
-RUN mkdir app
 WORKDIR /app
 
-COPY ./package.json ./
+COPY ./package*.json ./
 RUN npm install --production
 
 COPY . .
-RUN cd app
 RUN npm run build
 
 FROM nginx:stable-alpine
