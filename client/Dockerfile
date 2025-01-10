@@ -2,7 +2,7 @@ FROM node:20.17.0-slim AS builder
 
 WORKDIR /app
 
-COPY ./package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install --production
 
 COPY . .

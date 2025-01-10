@@ -15,7 +15,7 @@ ENV MONGODB_DATABASE=${MONGODB_DATABASE}
 RUN mkdir app
 WORKDIR /app
 
-COPY ./package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install --production
 
 COPY . .
