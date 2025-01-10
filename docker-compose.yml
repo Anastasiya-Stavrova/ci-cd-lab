@@ -42,6 +42,8 @@ services:
       - MONGODB_PASSWORD=${MONGODB_PASSWORD}
       - MONGODB_DATABASE=${MONGODB_DATABASE}
       - MONGODB_LOCAL_PORT=${MONGODB_DOCKER_PORT}
+      - MONGODB_LOCAL_HOST=${MONGODB_DOCKER_HOST}
+    command: "npm run start"
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
