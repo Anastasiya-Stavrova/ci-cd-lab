@@ -19,5 +19,5 @@ COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
-RUN pwd
+RUN ls -l
 CMD ["npm", "run", "start"]
