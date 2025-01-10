@@ -1,11 +1,6 @@
 build_job:
   stage: build
-  before_script:
-    - apk add git
-    - git config --global user.email "$GITLAB_USER_EMAIL"
-    - git config --global user.name "$GITLAB_USER_NAME"
-    - git tag "$APP_VERSION"
-    - git push origin "$APP_VERSION"
   script:
     - echo "Login into Gitlab Registry..."
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - ls -l
