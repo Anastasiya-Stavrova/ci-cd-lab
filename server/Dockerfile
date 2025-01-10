@@ -1,6 +1,6 @@
 FROM node:20.17.0-slim
 
-WORKDIR /app
+WORKDIR /app/server
 
 COPY ./package.json ./
 RUN npm install --legacy-peer-deps
