@@ -4,15 +4,15 @@ build_job:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
     - echo "Building docker images..."
-    - echo "Building image $CI_REGISTRY_IMAGE-server:$APP_VERSION"
-    - docker buildx build -t $CI_REGISTRY_IMAGE-server:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE-server:latest ./server
+    - echo "Building image $CI_REGISTRY_IMAGE:$APP_VERSION"
+    - docker buildx build -t $CI_REGISTRY_IMAGE:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE-server:latest ./server
     - echo "Building image $CI_REGISTRY_IMAGE-nginx:$APP_VERSION"
     - docker buildx build -t $CI_REGISTRY_IMAGE-nginx:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE-nginx:latest ./nginx
     - echo "Building image $CI_REGISTRY_IMAGE-client:$APP_VERSION"
     - docker buildx build -t $CI_REGISTRY_IMAGE-client:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE-client:latest ./client
     - echo "All the images have been built!"
     - echo "Sending image to Gitlab Registry..."
-    - docker push $CI_REGISTRY_IMAGE-server:$APP_VERSION
+    - docker push $CI_REGISTRY_IMAGE:$APP_VERSION
     - docker push $CI_REGISTRY_IMAGE-nginx:$APP_VERSION
     - docker push $CI_REGISTRY_IMAGE-client:$APP_VERSION
     - echo "All images have been sent to Gitlab Registry!"
