@@ -1,9 +1,5 @@
 build_job:
   stage: build
-  before_script:
-    - apk add git
-    - git tag $APP_VERSION
   script:
-    - echo "Current commit tag - $CI_COMMIT_TAG"
     - echo "Login into Gitlab Registry..."
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
