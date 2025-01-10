@@ -12,8 +12,10 @@ app.use(express.json());
 
 const port = 3000;
 
-const mongoUri = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_DOCKER_HOST}:${process.env.MONGODB_LOCAL_PORT}/${process.env.MONGODB_DATABASE}`;
-console.log(mongoUri);
+const mongoUri =
+  `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}` +
+  `@${process.env.MONGODB_DOCKER_HOST}:${process.env.MONGODB_LOCAL_PORT}/` +
+  `${process.env.MONGODB_DATABASE}`;
 
 (async () => {
   try {
