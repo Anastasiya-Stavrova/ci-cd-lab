@@ -19,4 +19,4 @@ RUN npm install
 
 COPY . .
 
-CMD ls -l
+CMD ls -l && pwd
