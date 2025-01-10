@@ -3,12 +3,11 @@ services:
     image: mongo:latest
     container_name: movies-app-mongodb
     restart: always
-    env_file: ./.env
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     ports:
-      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+      - ${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}
     volumes:
       - mongodb_data_container:/data/db
     networks:
@@ -38,12 +37,11 @@ services:
     build:
       dockerfile: Dockerfile
       context: "./server"
-    env_file: ./.env
     environment:
-      - MONGODB_USER=$MONGODB_USER
-      - MONGODB_PASSWORD=$MONGODB_PASSWORD
-      - MONGODB_DATABASE=$MONGODB_DATABASE
-      - MONGODB_LOCAL_PORT=$MONGODB_DOCKER_PORT
+      - MONGODB_USER=${MONGODB_USER}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_LOCAL_PORT=${MONGODB_DOCKER_PORT}
     ports:
       - "3000:3000"
     volumes:
