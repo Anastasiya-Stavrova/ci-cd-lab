@@ -12,12 +12,11 @@ ENV MONGODB_DOCKER_HOST=${MONGODB_DOCKER_HOST}
 ENV MONGODB_DOCKER_PORT=${MONGODB_DOCKER_PORT}
 ENV MONGODB_DATABASE=${MONGODB_DATABASE}
 
-RUN mkdir app
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm install 
 
 COPY . .
 
-CMD rm -rf node_modules && npm install && npm run start
+CMD ["npm", "run", "start"]
