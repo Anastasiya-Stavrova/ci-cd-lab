@@ -6,7 +6,14 @@ deploy_job:
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."
-    - docker rmi -f $(docker images --filter=reference=$CI_REGISTRY_IMAGE/* --format "{{.ID}}")
+    - >
+      images=$(docker images --filter=reference="$CI_REGISTRY_IMAGE/*" --format "{{.ID}}") &&
+      if [ -n "$images" ]; then
+          docker rmi -f $images;
+      else
+          echo "There are no images to delete";
+      fi
+    - docker images
     - echo "Pulling latest images for application..."
     - docker compose pull
     - echo "Container startup..."
