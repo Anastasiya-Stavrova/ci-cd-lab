@@ -46,7 +46,7 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      - ./server:/usr/src/app
+      - ./server:/app
     networks:
       - web_network
 
