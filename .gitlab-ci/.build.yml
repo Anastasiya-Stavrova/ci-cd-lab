@@ -14,7 +14,7 @@ build_job:
     - echo "All the images have been built:"
     - docker images
     - echo "Sending image to Gitlab Registry..."
-    - docker push $CI_REGISTRY_IMAGE-server:$APP_VERSION ./server
-    - docker push $CI_REGISTRY_IMAGE-nginx:$APP_VERSION ./nginx
-    - docker push $CI_REGISTRY_IMAGE-client:$APP_VERSION ./client
+    - docker push $CI_REGISTRY_IMAGE-server:$APP_VERSION
+    - docker push $CI_REGISTRY_IMAGE-nginx:$APP_VERSION
+    - docker push $CI_REGISTRY_IMAGE-client:$APP_VERSION
     - echo "All images have been sent to Gitlab Registry!"
