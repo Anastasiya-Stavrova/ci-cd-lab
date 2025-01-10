@@ -1,12 +1,10 @@
 FROM node:20.17.0-slim
 
-WORKDIR /app/server
+WORKDIR /app
 
 COPY ./package.json ./
 RUN npm install --legacy-peer-deps
 
 COPY . .
 
-EXPOSE 3000
-
-CMD ["npm", "run", "start"]
+RUN npm run start

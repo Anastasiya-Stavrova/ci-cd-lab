@@ -45,8 +45,8 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      - /app/server/node_modules
-      - ./server:/app/server
+      - /app/node_modules
+      - ./server:/app
     networks:
       - web_network
 
@@ -60,8 +60,8 @@ services:
       dockerfile: Dockerfile
       context: ./client
     volumes:
-      - /app/client/node_modules
-      - ./client:/app/client
+      - /app/node_modules
+      - ./client:/app
     networks:
       - web_network
 
