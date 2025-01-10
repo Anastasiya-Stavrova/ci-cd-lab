@@ -1,6 +1,14 @@
 build_job:
   stage: build
   script:
-    - echo "Login into Gitlab Registry..."
+    - echo "Login to Gitlab Registry..."
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-    - ls -l
+    - echo "Building docker images..."
+    - docker build -t $CI_REGISTRY_IMAGE-client:$APP_VERSION ./client
+    - docker build -t $CI_REGISTRY_IMAGE-nginx:$APP_VERSION ./nginx
+    - docker build -t $CI_REGISTRY_IMAGE-server:$APP_VERSION ./server
+    - echo "Sending image to Gitlab Registry..."
+    - docker push $CI_REGISTRY_IMAGE-client:$APP_VERSION
+    - docker push $CI_REGISTRY_IMAGE-nginx:$APP_VERSION
+    - docker push $CI_REGISTRY_IMAGE-server:$APP_VERSION
+    - echo "Build complete!"
