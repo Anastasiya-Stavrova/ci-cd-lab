@@ -4,6 +4,7 @@ include:
 
 variables:
   APP_VERSION: "v0.$CI_PIPELINE_IID"
+  GIT_STRATEGY: clone
 
 stages:
   - lint
