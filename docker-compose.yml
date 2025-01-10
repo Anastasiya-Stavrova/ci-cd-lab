@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "3050:80"
+      - "127.0.0.1:3050:80"
     networks:
       - web_network
 
@@ -43,7 +43,7 @@ services:
       - MONGODB_DATABASE=${MONGODB_DATABASE}
       - MONGODB_LOCAL_PORT=${MONGODB_DOCKER_PORT}
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     volumes:
       - /app/node_modules
       - ./server:/app
