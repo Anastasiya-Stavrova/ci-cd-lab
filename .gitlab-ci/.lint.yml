@@ -1,6 +1,6 @@
 lint_job:
   stage: lint
-  image: node:20-slim
+  image: node:20.17.0-slim
   script:
     - chmod +x lint.sh
     - cd server
