@@ -1,5 +1,5 @@
 build_job:
   stage: build
   script:
-    - echo "Login into Gitlab Registry..."
+    - echo "Login into Gitlab Registry"
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
