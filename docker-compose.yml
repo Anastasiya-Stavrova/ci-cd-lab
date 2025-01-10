@@ -67,6 +67,9 @@ services:
     networks:
       - web_network
 
+volumes:
+  mongodb_data_container:
+
 networks:
   web_network:
     driver: bridge
