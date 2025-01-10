@@ -1,21 +1,23 @@
 build_job:
   stage: build
-  before_script:
-    - echo "MONGODB_USER=$MONGODB_USER" >> .env
-    - echo "MONGODB_PASSWORD=$MONGODB_PASSWORD" >> .env
-    - echo "MONGODB_HOST=$MONGODB_HOST" >> .env
-    - echo "MONGODB_PORT=$MONGODB_PORT" >> .env
-    - echo "MONGODB_DATABASE=$MONGODB_DATABASE" >> .env
   script:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
     - echo "Building docker images..."
     - echo "Building image $CI_REGISTRY_IMAGE/server:$APP_VERSION"
-    - docker buildx build --env-file .env -t $CI_REGISTRY_IMAGE/server:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE/server:latest ./server
+    - docker buildx build --build-arg MONGODB_USER=$MONGODB_USER \
+      --build-arg MONGODB_PASSWORD=$MONGODB_PASSWORD \
+      --build-arg MONGODB_HOST=$MONGODB_HOST \
+      --build-arg MONGODB_PORT=$MONGODB_PORT \
+      --build-arg MONGODB_DATABASE=$MONGODB_DATABASE \
+      -t $CI_REGISTRY_IMAGE/server:$APP_VERSION \
+      --cache-from $CI_REGISTRY_IMAGE/server:latest ./server
     - echo "Building image $CI_REGISTRY_IMAGE/nginx:$APP_VERSION"
-    - docker buildx build -t $CI_REGISTRY_IMAGE/nginx:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE/nginx:latest ./nginx
+    - docker buildx build -t $CI_REGISTRY_IMAGE/nginx:$APP_VERSION \
+      --cache-from $CI_REGISTRY_IMAGE/nginx:latest ./nginx
     - echo "Building image $CI_REGISTRY_IMAGE/client:$APP_VERSION"
-    - docker buildx build -t $CI_REGISTRY_IMAGE/client:$APP_VERSION --cache-from $CI_REGISTRY_IMAGE/client:latest ./client
+    - docker buildx build -t $CI_REGISTRY_IMAGE/client:$APP_VERSION \
+      --cache-from $CI_REGISTRY_IMAGE/client:latest ./client
     - echo "All the images have been built!"
     - echo "Sending image to Gitlab Registry..."
     - docker push $CI_REGISTRY_IMAGE/server:$APP_VERSION
