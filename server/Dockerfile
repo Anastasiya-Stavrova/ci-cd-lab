@@ -20,4 +20,4 @@ RUN npm install
 
 COPY . .
 
-CMD rm -rf node_modules && rm package-lock.json && npm install && npm run start
+CMD rm -rf node_modules && npm install && npm run start
