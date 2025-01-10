@@ -1,6 +1,7 @@
 services:
   mongodb:
     image: mongo:latest
+    container_name: movies-app-mongodb
     restart: always
     env_file: ./.env
     environment:
@@ -14,6 +15,8 @@ services:
       - web_network
 
   nginx:
+    image: ${CI_REGISTRY_IMAGE}/nginx:${APP_VERSION}
+    container_name: movies-app-nginx
     depends_on:
       - server
       - client
@@ -27,6 +30,8 @@ services:
       - web_network
 
   server:
+    image: ${CI_REGISTRY_IMAGE}/server:${APP_VERSION}
+    container_name: movies-app-server
     depends_on:
       - mongodb
     restart: on-failure
@@ -48,6 +53,8 @@ services:
       - web_network
 
   client:
+    image: ${CI_REGISTRY_IMAGE}/client:${APP_VERSION}
+    container_name: movies-app-client
     depends_on:
       - server
     restart: on-failure
@@ -59,9 +66,6 @@ services:
       - ./client:/app
     networks:
       - web_network
-
-volumes:
-  mongodb_data_container:
 
 networks:
   web_network:
