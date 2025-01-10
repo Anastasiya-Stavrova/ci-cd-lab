@@ -12,11 +12,14 @@ ENV MONGODB_DOCKER_HOST=${MONGODB_DOCKER_HOST}
 ENV MONGODB_DOCKER_PORT=${MONGODB_DOCKER_PORT}
 ENV MONGODB_DATABASE=${MONGODB_DATABASE}
 
+RUN mkdir app
 WORKDIR /app
 
 COPY ./package.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --production
 
 COPY . .
+
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]

@@ -1,9 +1,10 @@
 FROM node:20.17.0-slim AS builder
 
+RUN mkdir app
 WORKDIR /app
 
 COPY ./package.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --production
 
 COPY . .
 RUN npm run build
