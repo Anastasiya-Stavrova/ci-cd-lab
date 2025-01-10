@@ -6,7 +6,12 @@ build_job:
     - echo "Building docker images..."
     - echo "Building image $CI_REGISTRY_IMAGE/server:$APP_VERSION"
     - >
-      docker buildx build -t $CI_REGISTRY_IMAGE/server:$APP_VERSION \
+      docker buildx build --build-arg MONGODB_USER=$MONGODB_USER \
+        --build-arg MONGODB_PASSWORD=$MONGODB_PASSWORD \
+        --build-arg MONGODB_DOCKER_HOST=$MONGODB_DOCKER_HOST \
+        --build-arg MONGODB_DOCKER_PORT=$MONGODB_DOCKER_PORT \
+        --build-arg MONGODB_DATABASE=$MONGODB_DATABASE \
+        -t $CI_REGISTRY_IMAGE/server:$APP_VERSION \
         --cache-from $CI_REGISTRY_IMAGE/server:latest ./server
     - echo "Building image $CI_REGISTRY_IMAGE/nginx:$APP_VERSION"
     - >
