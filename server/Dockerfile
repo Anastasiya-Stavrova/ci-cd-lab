@@ -20,4 +20,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["/bin/sh", "-c", "cd /app && npm run start"]
+CMD ["npm", "run", "start"]
