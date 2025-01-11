@@ -49,7 +49,7 @@ services:
       - "127.0.0.1:3000:3000"
     volumes:
       - ./server/src:/home/node/app/src
-      - ./nodemon.json:/home/node/app/nodemon.json
+      - ./server/nodemon.json:/home/node/app/nodemon.json
     networks:
       - web_network
 
