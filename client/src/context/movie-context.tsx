@@ -17,7 +17,9 @@ interface IMovieAction {
 
 const fetchData = async (): Promise<IMovieDataType[] | undefined> => {
   try {
-    const response = await axios.get(`http://localhost:3000/movies`);
+    const response = await axios.get(
+      `http://localhost:${process.env.SERVER_PORT}/movies`
+    );
     const dataArray = response.data;
     return dataArray;
   } catch (error) {

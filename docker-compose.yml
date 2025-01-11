@@ -46,7 +46,7 @@ services:
       - MONGODB_LOCAL_PORT=${MONGODB_DOCKER_PORT}
       - MONGODB_LOCAL_HOST=${MONGODB_DOCKER_HOST}
     ports:
-      - "3000:3000"
+      - "3060:3000"
     volumes:
       - ./server/src:/app/src
     networks:
@@ -61,6 +61,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./client
+    environment:
+      - SERVER_PORT="3060"
     volumes:
       - ./client:/app
     networks:
