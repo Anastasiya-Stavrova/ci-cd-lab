@@ -14,7 +14,7 @@ services:
       - web_network
 
   nginx:
-    image: ${CI_REGISTRY_IMAGE}/nginx:${APP_VERSION}
+    image: ${CI_REGISTRY_IMAGE}/nginx:${VERSION}
     container_name: movies-app-nginx
     depends_on:
       - server
@@ -29,7 +29,7 @@ services:
       - web_network
 
   server:
-    image: ${CI_REGISTRY_IMAGE}/server:${APP_VERSION}
+    image: ${CI_REGISTRY_IMAGE}/server:${VERSION}
     container_name: movies-app-server
     depends_on:
       - mongodb
@@ -53,7 +53,7 @@ services:
       - web_network
 
   client:
-    image: ${CI_REGISTRY_IMAGE}/client:${APP_VERSION}
+    image: ${CI_REGISTRY_IMAGE}/client:${VERSION}
     container_name: movies-app-client
     depends_on:
       - server
