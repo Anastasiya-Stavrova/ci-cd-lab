@@ -5,13 +5,13 @@ include:
   - local: ".gitlab-ci/.notify.yml"
   - local: ".gitlab-ci/.rollback.yml"
 
+variables:
+  APP_VERSION: "v0.$CI_PIPELINE_IID"
+
 .docker-login:
   before_script:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
-
-variables:
-  APP_VERSION: "v0.0.$CI_PIPELINE_IID"
 
 stages:
   - lint

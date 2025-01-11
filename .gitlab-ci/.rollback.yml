@@ -3,5 +3,6 @@ rollback_job:
   needs:
     - job: deploy_job
   script:
+    - echo "Current application version - $APP_VERSION"
     - echo "Rollback the application to a previous version..."
   when: manual
