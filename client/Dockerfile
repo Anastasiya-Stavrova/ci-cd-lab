@@ -3,7 +3,7 @@ FROM node:20.17.0-slim AS building
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --production
+RUN npm install --legacy-peer-deps
 
 COPY . .
 RUN npm run build

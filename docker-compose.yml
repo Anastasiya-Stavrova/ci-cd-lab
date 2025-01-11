@@ -48,7 +48,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./server/src:/home/node/app/src
+      - ./server/src:/app/src
     networks:
       - web_network
 
