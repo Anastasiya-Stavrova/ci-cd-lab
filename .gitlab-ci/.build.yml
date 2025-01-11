@@ -18,5 +18,8 @@ build_job:
     - docker push $CI_REGISTRY_IMAGE/nginx:$APP_VERSION
     - docker push $CI_REGISTRY_IMAGE/client:$APP_VERSION
     - echo "All images have been sent to Gitlab Registry!"
+  artifacts:
+    reports:
+      dotenv: .env
   only:
     - master

@@ -3,7 +3,4 @@ deploy_job:
   extends: .docker-deploy
   needs:
     - job: build_job
-  artifacts:
-    reports:
-      dotenv: .env
   environment: production
