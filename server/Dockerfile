@@ -1,25 +1,15 @@
 FROM node:20.17.0-slim AS base
 
-WORKDIR /app
-  
-FROM base AS dependencies  
+WORKDIR /home/node/app
 
 COPY package*.json ./
-RUN npm install
-  
-FROM dependencies AS build  
 
-WORKDIR /app
+RUN npm i
 
-COPY src /app
+COPY . .
+
+FROM base AS production
+
+ENV NODE_PATH=./dist
+
 RUN npm run build
-  
-FROM node:8.9-alpine AS release  
-
-WORKDIR /app
-
-COPY --from=dependencies /app/package.json ./
-RUN npm install --only=production
-COPY --from=build /app ./
-
-CMD ["node", "index.js"]
