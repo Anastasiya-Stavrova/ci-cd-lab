@@ -9,4 +9,4 @@ RUN npm install
 
 COPY . /app
 
-CMD ["nodemon", "index.ts"]
+CMD ["npm", "run", "start"]
