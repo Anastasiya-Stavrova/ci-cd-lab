@@ -32,7 +32,7 @@ variables:
     - echo "Pulling latest images for application..."
     - docker compose pull
     - echo "Container startup..."
-    - VERSION=$APP_VERSION docker compose up -d --force-recreate
+    - export VERSION=$APP_VERSION docker compose up -d --force-recreate
     - echo "Application successfully deployed!"
   only:
     - master
