@@ -5,7 +5,7 @@ deploy_job:
     - job: build_job
   script:
     - chmod ugo+x cleaning.sh
-    - sh cleaning.sh
+    - sh ./.gitlab-ci/cleaning.sh
     - docker images
     - echo "Pulling latest images for application..."
     - docker compose pull
