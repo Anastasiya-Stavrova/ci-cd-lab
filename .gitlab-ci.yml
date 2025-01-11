@@ -20,7 +20,7 @@ variables:
   script:
     - echo "Deploy startup..."
   after_script:
-    - export VERSION=BUILD_VERSION
+    - export VERSION=$BUILD_VERSION
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."
