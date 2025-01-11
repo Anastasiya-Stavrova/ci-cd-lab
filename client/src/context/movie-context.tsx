@@ -1,9 +1,6 @@
 import { createContext, ReactNode, useReducer } from "react";
 import { IMovieDataType } from "../types/movieData";
 import axios from "axios";
-import * as dotenv from "dotenv";
-
-dotenv.config();
 
 interface IMovieContextProps {
   children: ReactNode;
