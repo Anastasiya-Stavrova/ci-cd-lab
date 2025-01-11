@@ -4,6 +4,7 @@
   needs:
     - job: deploy_job
   before_script:
+    - chmod +x notify.sh
     - echo "Notification sending..."
   only:
     - master
@@ -27,11 +28,5 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - |
-      printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
-        "$TELEGRAM_CHAT_ID" "$MESSAGE_SUCCESS" |
-      curl -s -X POST \
-        -H "Content-Type: application/json" \
-        -d @- \
-        "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+    - ./notify "$MESSAGE_SUCCESS"
   when: on_success
