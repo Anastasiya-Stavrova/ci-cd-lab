@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "127.0.0.1:3050:80"
+      - "3050:80"
     networks:
       - web_network
 
@@ -46,9 +46,9 @@ services:
       - MONGODB_LOCAL_PORT=${MONGODB_DOCKER_PORT}
       - MONGODB_LOCAL_HOST=${MONGODB_DOCKER_HOST}
     ports:
-      - "127.0.0.1:3000:3000"
+      - "3000:3000"
     volumes:
-      - ./server/src:/home/node/app/src
+      - ./server/src:/app/src
     networks:
       - web_network
 
@@ -62,7 +62,6 @@ services:
       dockerfile: Dockerfile
       context: ./client
     volumes:
-      - /app/node_modules
       - ./client:/app
     networks:
       - web_network

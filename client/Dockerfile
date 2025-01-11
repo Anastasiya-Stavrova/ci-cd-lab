@@ -1,9 +1,9 @@
-FROM node:20.17.0-slim AS builder
+FROM node:20.17.0-slim AS building
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --production
 
 COPY . .
 RUN npm run build
@@ -11,4 +11,4 @@ RUN npm run build
 FROM nginx:stable-alpine
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=building /app/dist /usr/share/nginx/html

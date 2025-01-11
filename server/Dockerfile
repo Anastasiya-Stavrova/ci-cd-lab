@@ -1,10 +1,10 @@
 FROM node:20.17.0-slim AS base
 
-WORKDIR /home/node/app
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm i
+RUN npm install --production
 
 COPY . .
 
