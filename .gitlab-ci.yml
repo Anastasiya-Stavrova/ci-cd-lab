@@ -10,6 +10,8 @@ variables:
 
 .docker-login:
   before_script:
+    - chmod ugo+x cleaning.sh
+    - chmod ugo+x deploy.sh
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
 
