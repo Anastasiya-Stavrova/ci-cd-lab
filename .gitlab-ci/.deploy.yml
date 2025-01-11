@@ -1,9 +1,9 @@
 deploy_job:
   stage: deploy
+  extends: .docker-login
   needs:
     - job: build_job
   script:
-    - echo "Login to Gitlab Registry..."
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."

@@ -1,10 +1,9 @@
 build_job:
   stage: build
+  extends: .docker-login
   needs:
     - job: lint_job
   script:
-    - echo "Login to Gitlab Registry..."
-    - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
     - echo "Building docker images..."
     - echo "Building image $CI_REGISTRY_IMAGE/server:$APP_VERSION"
     - docker build -t $CI_REGISTRY_IMAGE/server:$APP_VERSION  ./server

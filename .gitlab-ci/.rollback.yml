@@ -1,0 +1,7 @@
+rollback_job:
+  stage: rollback
+  needs:
+    - job: deploy_job
+  script:
+    - echo "Rollback the application to a previous version..."
+  when: manual
