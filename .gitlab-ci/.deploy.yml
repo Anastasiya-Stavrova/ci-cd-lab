@@ -4,7 +4,6 @@ deploy_job:
     - job: build_job
   script:
     - echo "Login to Gitlab Registry..."
-    - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."
