@@ -1,12 +1,25 @@
-FROM node:carbon
+FROM node:carbon AS base
 
 WORKDIR /app
-
-RUN npm install -g nodemon
+  
+FROM base AS dependencies  
 
 COPY package*.json ./
 RUN npm install
+  
+FROM dependencies AS build  
 
-COPY . /app
+WORKDIR /app
 
-CMD ["npm", "run", "start"]
+COPY src /app
+RUN npm run build
+  
+FROM node:8.9-alpine AS release  
+
+WORKDIR /app
+
+COPY --from=dependencies /app/package.json ./
+RUN npm install --only=production
+COPY --from=build /app ./
+
+CMD ["node", "index.js"]
