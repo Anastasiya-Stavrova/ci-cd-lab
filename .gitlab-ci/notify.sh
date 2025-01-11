@@ -1,3 +1,5 @@
+#!/bin/bash
+
 printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
         "$TELEGRAM_CHAT_ID" $1 |
       curl -s -X POST \
