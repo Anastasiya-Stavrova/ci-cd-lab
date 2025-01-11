@@ -2,16 +2,16 @@ lint_job:
   stage: lint
   image: node:20.17.0-slim
   script:
-    - chmod ugo+x lint.sh
+    - chmod +x lint.sh
     - cd server
     - echo "Install packages for a folder 'server'..."
     - npm install
-    - sh ../lint.sh server
+    - ../lint.sh server
     - cd ..
     - cd client
     - echo "Install packages for a folder 'client'..."
     - npm install
-    - sh ../lint.sh client
+    - ../lint.sh client
     - cd ..
     - echo "All files have been verified!"
   artifacts:
