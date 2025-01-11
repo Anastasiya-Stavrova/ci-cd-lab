@@ -2,11 +2,11 @@ lint_job:
   stage: lint
   image: node:20.17.0-slim
   script:
-    - chmod +x lint.sh
+    - chmod ugo+x lint.sh
     - cd server
     - echo "Install packages for a folder 'server'..."
     - npm install
-    - sh .../.gitlab-ci/lint.sh server
+    - sh ../.gitlab-ci/lint.sh server
     - cd ..
     - cd client
     - echo "Install packages for a folder 'client'..."
