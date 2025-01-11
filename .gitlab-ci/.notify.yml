@@ -1,0 +1,38 @@
+.notify:
+  stage: notify
+  needs:
+    - job: deploy_job
+  before_script:
+    - apk add --no-cache curl
+  only:
+    - master
+
+variables:
+  MESSAGE_SUCCESS: "*Deployment for $CI_PROJECT_NAME Successfull* 👌 \\n\\n*New App Version* _ $APP_VERSION _ \\n\\n[Open Website](http://localhost:3050/)"
+  MESSAGE_FAILURE: "*Deployment for $CI_PROJECT_NAME Failed* ❌ \\n\\n*Please check the error* \\n\\n[Open Pipeline]($CI_PIPELINE_URL)"
+
+job_notify_error:
+  extends: .notify
+  script:
+    - echo "Notification sending..."
+    - |
+      printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
+        "$TELEGRAM_CHAT_ID" "$MESSAGE_FAILURE" |
+      curl -s -X POST \
+        -H "Content-Type: application/json" \
+        -d @- \
+        "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+  when: on_failure
+
+job_notify_success:
+  extends: .notify
+  script:
+    - echo "Notification sending..."
+    - |
+      printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
+        "$TELEGRAM_CHAT_ID" "$MESSAGE_SUCCESS" |
+      curl -s -X POST \
+        -H "Content-Type: application/json" \
+        -d @- \
+        "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+  when: on_success

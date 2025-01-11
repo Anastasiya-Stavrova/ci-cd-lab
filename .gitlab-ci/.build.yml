@@ -1,5 +1,7 @@
 build_job:
   stage: build
+  needs:
+    - job: lint_job
   script:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
@@ -16,3 +18,5 @@ build_job:
     - docker push $CI_REGISTRY_IMAGE/nginx:$APP_VERSION
     - docker push $CI_REGISTRY_IMAGE/client:$APP_VERSION
     - echo "All images have been sent to Gitlab Registry!"
+  only:
+    - master
