@@ -10,9 +10,10 @@ OUTPUT=$(npm run lint 2>&1)
 
 cd ..
 
-echo "$OUTPUT" | tee -a lint_output.txt
+echo $OUTPUT | tee -a lint_output.txt
 
-if [[ "$OUTPUT" == *"error"* ]]; then
+if [[ $OUTPUT == *"error"* ]]
+then
   echo "Linting error in a folder: '$DIRECTORY'"
   exit 1
 fi
