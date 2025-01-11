@@ -1,6 +1,6 @@
 FROM node:20.17.0-slim AS base
 
-WORKDIR /app
+WORKDIR /home/node/app
 
 COPY package*.json ./
 
