@@ -35,5 +35,5 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - MESSAGE: $MESSAGE_SUCCESS
+    - MESSAGE=$MESSAGE_SUCCESS
   when: on_success
