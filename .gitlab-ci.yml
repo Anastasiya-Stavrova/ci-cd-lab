@@ -7,6 +7,8 @@ include:
 
 variables:
   APP_VERSION: "v0.$CI_PIPELINE_IID"
+  GIT_STRATEGY: clone
+  GIT_CLEAN_FLAGS: none
 
 .docker-login:
   before_script:
