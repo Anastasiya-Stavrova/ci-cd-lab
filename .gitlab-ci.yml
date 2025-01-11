@@ -10,10 +10,30 @@ variables:
 
 .docker-login:
   before_script:
-    - chmod ugo+x cleaning.sh
-    - chmod ugo+x deploy.sh
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
+
+.docker-deploy:
+  extends: .docker-login
+  after_script:
+    - echo "Stopping all containers..."
+    - docker compose down --remove-orphans
+    - echo "Deleting all old images for application..."
+    - >
+      images=$(docker images --filter=reference="$CI_REGISTRY_IMAGE/*" --format "{{.ID}}") &&
+      if [ -n "$images" ]; then
+          docker rmi -f $images;
+      else
+          echo "There are no images to delete";
+      fi
+    - docker images
+    - echo "Pulling latest images for application..."
+    - docker compose pull
+    - echo "Container startup..."
+    - docker compose up -d --force-recreate
+    - echo "Application successfully deployed!"
+  only:
+    - master
 
 stages:
   - lint

@@ -1,12 +1,6 @@
 deploy_job:
   stage: deploy
-  extends: .docker-login
+  extends: .docker-deploy
   needs:
     - job: build_job
-  script:
-    - sh cleaning.sh
-    - docker images
-    - sh deploy.sh
-  only:
-    - master
   environment: production
