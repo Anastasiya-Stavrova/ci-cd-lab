@@ -1,9 +1,10 @@
 .notify:
   stage: notify
+  image: curlimages/curl
   needs:
     - job: deploy_job
   before_script:
-    - apk add --no-cache curl
+    - echo "Notification sending..."
   only:
     - master
 
@@ -14,7 +15,6 @@ variables:
 notify_error_job:
   extends: .notify
   script:
-    - echo "Notification sending..."
     - |
       printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
         "$TELEGRAM_CHAT_ID" "$MESSAGE_FAILURE" |
@@ -27,7 +27,6 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - echo "Notification sending..."
     - |
       printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
         "$TELEGRAM_CHAT_ID" "$MESSAGE_SUCCESS" |
