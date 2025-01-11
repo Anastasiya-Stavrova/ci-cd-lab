@@ -8,10 +8,10 @@
     - master
 
 variables:
-  MESSAGE_SUCCESS: "*Deployment for $CI_PROJECT_NAME Successfull* 👌 \\n\\n*New App Version* _ $APP_VERSION _ \\n\\n[Open Website](http://localhost:3050/)"
+  MESSAGE_SUCCESS: "*Deployment for $CI_PROJECT_NAME Successfull* 👌 \\n\\n*New App Version* _ $APP_VERSION _ \\n\\n[Open Website](http://localhost:3050/)\n"
   MESSAGE_FAILURE: "*Deployment for $CI_PROJECT_NAME Failed* ❌ \\n\\n*Please check the error* \\n\\n[Open Pipeline]($CI_PIPELINE_URL)"
 
-job_notify_error:
+notify_error_job:
   extends: .notify
   script:
     - echo "Notification sending..."
@@ -24,7 +24,7 @@ job_notify_error:
         "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
   when: on_failure
 
-job_notify_success:
+notify_success_job:
   extends: .notify
   script:
     - echo "Notification sending..."
