@@ -12,26 +12,26 @@ variables:
   only:
     - master
 
-notify_error_job:
+.notify_job:
   extends: .notify
+  variables:
+    MESSAGE: $MESSAGE_SUCCESS
   script:
     - |
       printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
-        "$TELEGRAM_CHAT_ID" "$MESSAGE_FAILURE" |
+        "$TELEGRAM_CHAT_ID" "$MESSAGE" |
       curl -s -X POST \
         -H "Content-Type: application/json" \
         -d @- \
         "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+  when: always
+
+notify_error_job:
+  extends: .notify_job
+  variables:
+    MESSAGE: $MESSAGE_FAILURE
   when: on_failure
 
 notify_success_job:
-  extends: .notify
-  script:
-    - |
-      printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
-        "$TELEGRAM_CHAT_ID" "$MESSAGE_SUCCESS" |
-      curl -s -X POST \
-        -H "Content-Type: application/json" \
-        -d @- \
-        "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
+  extends: .notify_job
   when: on_success
