@@ -8,11 +8,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     ports:
       - ${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}
-    healthcheck:
-      test: ["CMD", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     volumes:
       - mongodb_data_container:/data/db
     networks:
@@ -37,8 +32,7 @@ services:
     image: ${CI_REGISTRY_IMAGE}/server:${APP_VERSION}
     container_name: movies-app-server
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
     restart: on-failure
     build:
       dockerfile: Dockerfile
