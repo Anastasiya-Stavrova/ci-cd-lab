@@ -3,6 +3,8 @@
   image: curlimages/curl
   needs:
     - job: deploy_job
+  variables:
+    MESSAGE: ""
   before_script:
     - echo "Notification sending..."
   after_script:
