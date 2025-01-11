@@ -37,6 +37,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: "./server"
+      target: production
+    command: node dist/index.js
     environment:
       - MONGODB_USER=${MONGODB_USER}
       - MONGODB_PASSWORD=${MONGODB_PASSWORD}
@@ -46,8 +48,8 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     volumes:
-      - /app/node_modules
-      - ./server:/app
+      - ./server/src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
     networks:
       - web_network
 
