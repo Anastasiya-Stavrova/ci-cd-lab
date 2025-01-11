@@ -3,4 +3,9 @@ deploy_job:
   extends: .docker-deploy
   needs:
     - job: build_job
+  sxript:
+    - echo APP_VERSION="v0.$CI_PIPELINE_IID" > .env
+  artifacts:
+    reports:
+      dotenv: .env
   environment: production
