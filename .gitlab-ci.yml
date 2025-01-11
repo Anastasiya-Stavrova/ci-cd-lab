@@ -15,11 +15,10 @@ variables:
 
 .docker-deploy:
   extends: .docker-login
-  variables:
-    BUILD_VERSION: $APP_VERSION
   script:
     - echo "Deploy startup..."
   after_script:
+    - export VERSION=$APP_VERSION
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."
@@ -32,7 +31,6 @@ variables:
       fi
     - docker images
     - echo "Pulling latest images for application..."
-    - export VERSION=$BUILD_VERSION
     - docker compose pull
     - echo "Container startup..."
     - docker compose up -d --force-recreate
