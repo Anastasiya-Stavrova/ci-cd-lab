@@ -28,5 +28,5 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - ./notify.sh $MESSAGE_SUCCESS
+    - ./.gitlab-ci/notify.sh $MESSAGE_SUCCESS
   when: on_success
