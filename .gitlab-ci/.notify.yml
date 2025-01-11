@@ -3,8 +3,6 @@
   image: curlimages/curl
   needs:
     - job: deploy_job
-  variables:
-    MESSAGE: ""
   before_script:
     - echo "Notification sending..."
   after_script:
@@ -19,6 +17,7 @@
     - master
 
 variables:
+  MESSAGE: ""
   MESSAGE_SUCCESS: "*Deployment for $CI_PROJECT_NAME Successfull* 👌 \\n\\n*New App Version* _ $APP_VERSION _ \\n\\n[Open Website](http://127.0.0.1:3050/)"
   MESSAGE_FAILURE: "*Deployment for $CI_PROJECT_NAME Failed* ❌ \\n\\n*Please check the error* \\n\\n[Open Pipeline]($CI_PIPELINE_URL)"
 
@@ -37,5 +36,5 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - MESSAGE=$MESSAGE_SUCCESS
+    - $MESSAGE=$MESSAGE_SUCCESS
   when: on_success
