@@ -4,7 +4,6 @@
   needs:
     - job: deploy_job
   before_script:
-    - chmod +x notify.sh
     - echo "Notification sending..."
   only:
     - master
@@ -28,5 +27,6 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
+    - chmod +x notify.sh
     - notify.sh $MESSAGE_SUCCESS
   when: on_success
