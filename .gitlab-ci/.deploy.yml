@@ -1,5 +1,6 @@
 deploy_job:
   stage: deploy
+  extends: .docker-login
   needs:
     - job: build_job
   script:
