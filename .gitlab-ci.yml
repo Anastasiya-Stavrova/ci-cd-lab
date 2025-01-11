@@ -30,10 +30,10 @@ variables:
       fi
     - docker images
     - echo "Pulling latest images for application..."
+    - VERSION=$APP_VERSION
     - docker compose pull
     - echo "Container startup..."
-    - echo VERSION=$APP_VERSION > .env
-    - docker compose up --env-file .env -d --force-recreate
+    - docker compose up -d --force-recreate
     - echo "Application successfully deployed!"
   only:
     - master
