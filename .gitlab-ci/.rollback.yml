@@ -4,6 +4,6 @@ rollback_job:
     - job: deploy_job
   script:
     - echo "Current application version - $APP_VERSION"
-    - PREVIOUS_VERSION=$(echo ${CURRENT_VERSION:2} | awk -F. '{print "v."$1"."($2-1)}')
+    - PREVIOUS_VERSION=$(echo ${APP_VERSION:2} | awk -F. '{print "v."$1"."($2-1)}')
     - echo "Rollback the application to a previous version ($PREVIOUS_VERSION) ..."
   when: manual
