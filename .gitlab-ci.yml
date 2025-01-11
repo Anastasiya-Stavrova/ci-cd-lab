@@ -15,12 +15,9 @@ variables:
 
 .docker-deploy:
   extends: .docker-login
-  variables:
-    BUILD_VERSION: $APP_VERSION
   script:
-    - echo "Deploy startup..."
+    - echo VERSION="$APP_VERSION" > .env
   after_script:
-    - export VERSION=$BUILD_VERSION
     - echo "Stopping all containers..."
     - docker compose down --remove-orphans
     - echo "Deleting all old images for application..."
