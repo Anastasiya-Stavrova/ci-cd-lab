@@ -12,7 +12,10 @@ app.use(express.json());
 
 const port = 3000;
 
-const mongoUri = "mongodb://root:mongo_root@172.18.0.2:27017/";
+const mongoUri =
+  `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}` +
+  `@${process.env.MONGODB_LOCAL_HOST}:${process.env.MONGODB_LOCAL_PORT}/` +
+  `${process.env.MONGODB_DATABASE}`;
 
 (async () => {
   try {
