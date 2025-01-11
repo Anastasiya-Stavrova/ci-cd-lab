@@ -1,11 +1,18 @@
 .notify:
   stage: notify
+  image: curlimages/curl
   needs:
     - job: deploy_job
   before_script:
-    - apk add curl
-    - chmod +x notify.sh
     - echo "Notification sending..."
+  after_script:
+    - |
+      printf '{"chat_id": "%s", "text": "%s", "parse_mode": "Markdown"}' \
+        "$TELEGRAM_CHAT_ID" "$MESSAGE" |
+      curl -s -X POST \
+        -H "Content-Type: application/json" \
+        -d @- \
+        "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage"
   only:
     - master
 
@@ -28,6 +35,5 @@ notify_error_job:
 notify_success_job:
   extends: .notify
   script:
-    - ls -l
-    - ./notify.sh $MESSAGE_SUCCESS
+    - MESSAGE: $MESSAGE_SUCCESS
   when: on_success
