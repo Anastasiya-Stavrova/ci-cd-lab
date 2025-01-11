@@ -30,7 +30,7 @@ variables:
       fi
     - docker images
     - echo "Pulling latest images for application..."
-    - VERSION=$APP_VERSION
+    - export VERSION=$APP_VERSION
     - docker compose pull
     - echo "Container startup..."
     - docker compose up -d --force-recreate
