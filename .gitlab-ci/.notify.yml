@@ -4,7 +4,7 @@
   needs:
     - job: deploy_job
   before_script:
-    - chmod +x notify.sh
+    - chmod +x ./.gitlab-ci/notify.sh
     - echo "Notification sending..."
   only:
     - master
