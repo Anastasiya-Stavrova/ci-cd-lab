@@ -61,8 +61,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./client
-    environment:
-      - SERVER_PORT="3060"
     volumes:
       - ./client:/app
     networks:
