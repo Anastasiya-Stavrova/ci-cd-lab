@@ -1,6 +1,8 @@
 rollback_job:
   stage: rollback
   extends: .docker-deploy
+  variables:
+    - BUILD_VERSION: $PREVIOUS_VERSION
   needs:
     - job: deploy_job
   script:
