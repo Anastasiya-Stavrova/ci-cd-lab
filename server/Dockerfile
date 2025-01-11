@@ -1,10 +1,12 @@
-FROM node:20.17.0-slim
+FROM node:carbon
 
 WORKDIR /app
 
-COPY package.json ./
-RUN npm install --omit=dev
+RUN npm install -g nodemon
 
-COPY . .
+COPY package*.json ./
+RUN npm install
 
-CMD ["node", "index.ts"]
+COPY . /app
+
+CMD ["nodemon", "index.ts"]
