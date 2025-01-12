@@ -19,7 +19,8 @@ lint_job:
         - "**/*"
       when: always
     - changes:
-        - "**/*ignore"
+        - "**/.gitignore"
+        - "**/.dockerignore"
         - "**/*.yml"
         - "**/*.yaml"
         - "**/*.json"
