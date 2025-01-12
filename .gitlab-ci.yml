@@ -12,6 +12,10 @@ variables:
   before_script:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
+  rules:
+    - changes:
+        - "*/**"
+        - "!README.md"
 
 .docker-deploy:
   extends: .docker-login

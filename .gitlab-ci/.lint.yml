@@ -14,6 +14,10 @@ lint_job:
     - ../lint.sh client
     - cd ..
     - echo "All files have been verified!"
+  rules:
+    - changes:
+        - "*/**"
+        - "!README.md"
   artifacts:
     paths:
       - lint_output.txt
