@@ -17,16 +17,13 @@ lint_job:
   rules:
     - changes:
         - "**/*"
-      when: always
-    - changes:
-        - "**/.gitignore"
-        - "**/.dockerignore"
-        - "**/*.yml"
-        - "**/*.yaml"
-        - "**/*.json"
-        - "**/Dockerfile*"
-        - "**/*.sh"
-      when: never
+        - "!**/.gitignore"
+        - "!**/.dockerignore"
+        - "!**/*.yml"
+        - "!**/*.yaml"
+        - "!**/*.json"
+        - "!**/Dockerfile*"
+        - "!**/*.sh"
   artifacts:
     paths:
       - lint_output.txt
