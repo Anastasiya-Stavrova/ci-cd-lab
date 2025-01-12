@@ -16,14 +16,14 @@ lint_job:
     - echo "All files have been verified!"
   rules:
     - changes:
-        - "**/*"
-        - "!**/.gitignore"
-        - "!**/.dockerignore"
-        - "!**/*.yml"
-        - "!**/*.yaml"
-        - "!**/*.json"
-        - "!**/Dockerfile*"
-        - "!**/*.sh"
+        - "**/.gitignore"
+        - "**/.dockerignore"
+        - "**/*.yml"
+        - "**/*.yaml"
+        - "**/*.json"
+        - "**/Dockerfile*"
+        - "**/*.sh"
+      when: never
   artifacts:
     paths:
       - lint_output.txt
