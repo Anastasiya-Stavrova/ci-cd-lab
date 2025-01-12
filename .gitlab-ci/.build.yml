@@ -3,6 +3,7 @@ build_job:
   extends: .docker-login
   needs:
     - job: lint_job
+      optional: true
   script:
     - echo "Building docker images..."
     - echo "Building image $CI_REGISTRY_IMAGE/server:$APP_VERSION"

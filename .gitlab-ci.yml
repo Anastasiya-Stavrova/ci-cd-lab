@@ -12,10 +12,8 @@ variables:
   before_script:
     - echo "Login to Gitlab Registry..."
     - docker login -u $CI_REGISTRY_USER -p $MY_PROJECT_TOKEN $CI_REGISTRY
-  rules:
-    - changes:
-        - "*/**"
-        - "!README.md"
+  only:
+    - master
 
 .docker-deploy:
   extends: .docker-login
@@ -38,8 +36,6 @@ variables:
     - echo "Container startup..."
     - docker compose up -d --force-recreate
     - echo "Application successfully deployed!"
-  only:
-    - master
 
 stages:
   - lint
