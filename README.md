@@ -7,5 +7,5 @@
 - Library "react-router"
 - UI kit "MUI"
 
-Resource [link](https://youtu.be/uGnh1NnlEbQ?si=VEmV-YKs4GtLr0xh).<br/>
+Resource [link](https://youtu.be/uGnh1NnlEbQ?si=VEmV-YKs4GtLr0xh)<br/>
 Source code and resources are available at the link below the video.
